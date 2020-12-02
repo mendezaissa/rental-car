@@ -1,0 +1,32 @@
+table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#deleteButton{
+    margin-right: 10px;
+}
+
+.container{
+    padding-bottom: 100px;
+}
+
+#adminView{
+    background-color: rgb(78, 115, 228);
+    padding-bottom: 50px;
+}
+
+#allBookingsH2{
+    padding-top: 20px;
+}

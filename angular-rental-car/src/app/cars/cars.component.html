@@ -1,0 +1,29 @@
+<div id="carsComponent">
+  <div class="container">
+    <h2 id="inventoryH2">Inventory:</h2>
+    <br>
+    <ul class="cars" *ngFor="let car of cars; let i = index">
+      <a routerLink="/detail/{{car.carId}}">
+        <span class="badge">{{car.carId}} : {{car.make}} {{car.model}}</span>
+        <img src="{{images[i].url}}" class="img" width="450" height="300">
+      </a>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- 
+<ul>
+  <li *ngFor="let image of images">
+    <img src="{{image.url}}" class="img" width="450" height="300">
+  </li>
+</ul>
+
+
+ <span class="badge">{{car.carId}} {{car.make}}, {{car.model}}</span>
+-->

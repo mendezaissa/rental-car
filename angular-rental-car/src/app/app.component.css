@@ -1,0 +1,18 @@
+#jumbo-div{
+    background-image: url("/assets/images/jumbo.jpg");
+    padding-top: 35px;
+    padding-bottom: 102px;
+    background-repeat: repeat-x;
+    color: white;
+}
+
+/*
+#nav{
+    /*padding-top: 20px;
+    padding-bottom: 20px;
+}
+*/
+
+#howtorent{
+    padding-right: 1000px;
+}

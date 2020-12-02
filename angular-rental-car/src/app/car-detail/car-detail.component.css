@@ -1,0 +1,19 @@
+#button{
+    margin-right: 10px;
+}
+
+.bookButton{
+    color: white;
+}
+
+.container{
+    padding-bottom: 50px;
+}
+
+#carDetails{
+    background-color: rgb(78, 115, 228);
+}
+
+h2{
+    padding-top: 20px;
+}

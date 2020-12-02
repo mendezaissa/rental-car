@@ -1,0 +1,37 @@
+<div id="carDetails">
+  <div class="container" *ngIf="car">
+    <h2>Rent a {{car.make}} {{car.model}} </h2>
+    <div><span>Daily Rate - $</span>{{car.rate}}</div>
+
+    <img src="{{image.url}}" class="img" width="450" height="300"> 
+
+    <br>
+    <br>
+    <p><strong>All Saturday reservations require a 2 day rental minimum as HTX offices are closed on Sundays</strong></p>
+
+    <div>3-Day Special - call for pricing</div>
+    <div>Weekly Special Rate (7 day) - call for pricing</div>
+
+    <br>
+
+    <button id="button" class="btn btn-secondary" (click)="goBack()">Back to Inventory</button>
+    <button class="btn btn-success">
+      <a class="bookButton" routerLink="/book/{{car.carId}}">RENT ME</a>
+    </button>
+
+    <br>
+    <br>
+
+    <div id="video" class="embed-responsive embed-responsive-16by9 container">
+      <youtube-player 
+        videoId="{{image.video}}" 
+        suggestedQuality="highres" 
+        [height]="250" 
+        [width]="500" 
+        [startSeconds]="4"
+        [endSeconds]="420">
+      </youtube-player>
+  </div>
+
+</div>
+</div>

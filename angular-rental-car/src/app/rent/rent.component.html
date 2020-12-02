@@ -1,0 +1,71 @@
+<div id="bookHeader" class="container" *ngIf="car">
+    <h3>Book a {{car.make}} {{car.model}} with Us!</h3>
+</div>
+
+<form id="book" class="needs-validation container" novalidate>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">First name</label>
+        <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Last name</label>
+        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label id="fromLabel" for="from">From: </label>
+          <input #fromValue type="date" id="from" name="from">
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label id="toLabel" for="to">To: </label>
+          <input #toValue type="date" id="to" name="to">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+          Agree to terms and conditions
+        </label>
+        <div class="invalid-feedback">
+          You must agree before submitting.
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <button class="btn btn-success" type="submit" *ngIf="car">
+      <a class="submitBooking" routerLink="/confirmation/{{car.carId}}" >Submit Booking 1</a>
+    </button>
+    -->
+
+    <button class="btn btn-success" type="submit" *ngIf="car">
+      <a class="submitBooking" (click)="addBooking( car.carId, 1, fromValue.value, toValue.value )" >Submit Book</a>
+    </button>
+
+        <!--
+    <ul class="bookings">
+      <li *ngFor="let booking of bookings">
+          <span class="badge">{{booking.transactionId}}</span> {{booking.from}}, {{booking.to}}
+      </li>
+    </ul>
+  -->
+
+</form>
+
+<br>
