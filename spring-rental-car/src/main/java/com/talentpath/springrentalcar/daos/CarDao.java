@@ -23,7 +23,7 @@ public interface CarDao {
 
     List<Transaction> getAllTransactions(); //complete
 
-    void deleteByTransactionId(Integer id) throws NoTransactionFoundException;
+    void deleteByTransactionId(Integer id) throws NoTransactionFoundException; //complete
 
     void updateTransaction(Transaction transaction);
 }

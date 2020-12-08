@@ -39,6 +39,10 @@ public class PostgresCarDao implements CarDao {
     @Override
     public Car getById(Integer carId) throws NoCarFoundException {
 
+        if(carId == null){
+            throw new NoCarFoundException("no car found with id null");
+        }
+
         try{
             Car carRetrieved = template.queryForObject("select * from \"car\" where \"carId\" = '" + carId + "'", new CarMapper());
             return carRetrieved;

@@ -74,6 +74,16 @@ public class PostgresRentalCarTest {
     }
 
     @Test
+    void getCarByNullId(){
+        try{
+            daoToTest.getById(null);
+            fail("should throw NoCarFoundException");
+        }catch( NoCarFoundException ex){
+            //should reach here
+        }
+    }
+
+    @Test
     void getCarBookingsById() throws NoCarFoundException {
         Car car = daoToTest.getById(1);
 
