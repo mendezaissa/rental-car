@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -49,6 +49,23 @@ public class PostgresRentalCarTest {
 
         Car car = daoToTest.getById( carById.getCarId() );
         assertEquals( 1, car.getCarId() );
+    }
+
+    @Test
+    void getCarByBadId(){
+
+        try{
+            Car carById = new Car();
+            carById.setCarId(100);
+            carById.setMake("does not");
+            carById.setModel("exist");
+            carById.setRate(300);
+
+            Car car = daoToTest.getById( carById.getCarId() );
+            fail("Should throw NoCarFoundException");
+        }catch( NoCarFoundException ex){
+            //should reach here
+        }
     }
 
 }
