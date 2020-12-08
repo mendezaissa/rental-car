@@ -2,6 +2,7 @@ package com.talentpath.springrentalcar.controllers;
 
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
 import com.talentpath.springrentalcar.exceptions.InvalidBookingException;
+import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.models.Book;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
@@ -27,7 +28,7 @@ public class CarController {
 
     //retrieve car details
     @GetMapping("/detail/{id}")
-    public Car getById(@PathVariable Integer id){
+    public Car getById(@PathVariable Integer id) throws NoCarFoundException {
         return service.getById(id);
     }
 

@@ -1,5 +1,6 @@
 package com.talentpath.springrentalcar.daos;
 
+import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +37,18 @@ public class PostgresRentalCarTest {
     void getAllTransactions(){
         List<Transaction> allTransactions = daoToTest.getAllTransactions();
         assertEquals( 0 , allTransactions.size() );
+    }
+
+    @Test
+    void getCarById() throws NoCarFoundException {
+        Car carById = new Car();
+        carById.setCarId(1);
+        carById.setMake("Ford");
+        carById.setModel("Mustang");
+        carById.setRate(500);
+
+        Car car = daoToTest.getById( carById.getCarId() );
+        assertEquals( 1, car.getCarId() );
     }
 
 }

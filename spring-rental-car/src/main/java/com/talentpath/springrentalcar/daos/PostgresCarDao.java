@@ -2,6 +2,7 @@ package com.talentpath.springrentalcar.daos;
 
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
 import com.talentpath.springrentalcar.exceptions.InvalidBookingException;
+import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.models.Book;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
@@ -25,7 +26,7 @@ public class PostgresCarDao implements CarDao {
 
     @Override
     public void reset(){
-        template.update("TRUNCATE \"transaction\", \"car\", \"customer\" RESTART IDENTITY " );
+        template.update("TRUNCATE \"transaction\" RESTART IDENTITY " );
     }
 
     @Override
@@ -35,13 +36,13 @@ public class PostgresCarDao implements CarDao {
     }
 
     @Override
-    public Car getById(Integer carId) {
+    public Car getById(Integer carId) throws NoCarFoundException {
 
         try{
             Car carRetrieved = template.queryForObject("select * from \"car\" where \"carId\" = '" + carId + "'", new CarMapper());
             return carRetrieved;
         }catch(DataAccessException ex){
-            throw new UnsupportedOperationException();
+            throw new NoCarFoundException("no car found with id: " + carId);
         }
     }
 

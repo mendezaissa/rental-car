@@ -1,6 +1,7 @@
 package com.talentpath.springrentalcar.daos;
 
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
+import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.models.Book;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
@@ -13,7 +14,7 @@ public interface CarDao {
 
     List<Car> getAllCars();
 
-    Car getById(Integer carId);
+    Car getById(Integer carId) throws NoCarFoundException;
 
     List<Transaction> getCarBookings(Integer carId);
 

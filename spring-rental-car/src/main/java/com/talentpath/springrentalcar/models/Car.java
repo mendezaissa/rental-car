@@ -6,7 +6,6 @@ public class Car {
     private String make;
     private String model;
     private Integer rate;
-    private String video;
 
     public Car(){}
 
@@ -15,7 +14,6 @@ public class Car {
         this.make = that.make;
         this.model = that.model;
         this.rate = that.rate;
-        this.video = that.video;
     }
 
     public Integer getCarId() {
@@ -48,13 +46,5 @@ public class Car {
 
     public void setRate(Integer rate) {
         this.rate = rate;
-    }
-
-    public String getVideo() {
-        return video;
-    }
-
-    public void setVideo(String video) {
-        this.video = video;
     }
 }
