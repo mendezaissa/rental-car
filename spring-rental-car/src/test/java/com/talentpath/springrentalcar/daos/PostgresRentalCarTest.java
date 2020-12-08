@@ -1,6 +1,7 @@
 package com.talentpath.springrentalcar.daos;
 
 import com.talentpath.springrentalcar.models.Car;
+import com.talentpath.springrentalcar.models.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,12 +27,15 @@ public class PostgresRentalCarTest {
 
     @Test
     void getAllCars() {
-
         List<Car> allCars = daoToTest.getAllCars();
         assertEquals(0, allCars.size() );
 
     }
 
-    
+    @Test
+    void getAllTransactions(){
+        List<Transaction> allTransactions = daoToTest.getAllTransactions();
+        assertEquals( 0 , allTransactions.size() );
+    }
 
 }
