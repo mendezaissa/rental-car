@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface CarDao {
 
+    void reset();
+
     List<Car> getAllCars();
 
     Car getById(Integer carId);

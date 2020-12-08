@@ -24,6 +24,11 @@ public class PostgresCarDao implements CarDao {
     JdbcTemplate template;
 
     @Override
+    public void reset(){
+        template.update("TRUNCATE \"transaction\", \"car\", \"customer\" RESTART IDENTITY " );
+    }
+
+    @Override
     public List<Car> getAllCars() {
         List<Car> allCars = template.query("select * from \"car\" order by \"carId\"", new CarMapper() );
         return allCars;

@@ -17,15 +17,23 @@
           <th>From Date</th>
           <th>To Date</th>
           <th>Delete</th>
+          <th>Update</th>
         </tr>
         <tr *ngFor="let booking of bookings">
           <td>{{booking.transactionId}}</td>
           <td>{{booking.carId}}</td>
-          <td>{{booking.from}}</td>
-          <td>{{booking.to}}</td>
+          <td>{{booking.from}}
+              <input *ngIf="calendarVisible" #fromValue type="date" id="from" name="from">
+          </td>
+          <td>{{booking.to}}
+              <input *ngIf="calendarVisible" #toValue type="date" id="to" name="to">
+          </td>
           <td>
               <button id="deleteButton" (click)="deleteTransaction(booking.transactionId)">Delete</button>
-           </td>
+          </td>
+          <td>
+            <button id="updateButton" (click)="toUpdate()" >Update</button>
+          </td>
         </tr>
       </table>
   </div>

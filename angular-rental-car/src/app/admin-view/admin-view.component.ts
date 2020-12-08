@@ -14,6 +14,7 @@ export class AdminViewComponent implements OnInit {
   bookings : Booking[];
   booking : Booking;
   transaction : Transaction;
+  calendarVisible : boolean = false; //if update button is clicked on then it will display the calendar
 
   constructor(
     private bookingService: BookingsService,
@@ -37,6 +38,10 @@ export class AdminViewComponent implements OnInit {
   updateTransaction( transactionId : number, carId : number , customerId : number , fromDate : any, toDate : any ) : void {
     this.transactionService.updateTransaction( { transactionId, carId, customerId, fromDate, toDate } as Transaction )
     .subscribe( () => location.reload );
+  }
+
+  toUpdate(){
+    this.calendarVisible = ! this.calendarVisible;
   }
 
 }
