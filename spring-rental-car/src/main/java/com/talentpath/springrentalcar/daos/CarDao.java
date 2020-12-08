@@ -16,7 +16,7 @@ public interface CarDao {
 
     Car getById(Integer carId) throws NoCarFoundException;
 
-    List<Transaction> getCarBookings(Integer carId);
+    List<Transaction> getCarBookings(Integer carId) throws NoCarFoundException;
 
     void addTransaction(Book toBook) throws BookingDaoException;
 

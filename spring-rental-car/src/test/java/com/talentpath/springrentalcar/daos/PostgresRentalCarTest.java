@@ -68,4 +68,12 @@ public class PostgresRentalCarTest {
         }
     }
 
+    @Test
+    void getCarBookingsById() throws NoCarFoundException {
+        Car car = daoToTest.getById(1);
+
+        List<Transaction> transactionsByCarId = daoToTest.getCarBookings( car.getCarId() );
+        assertEquals(0, transactionsByCarId.size() );
+    }
+
 }

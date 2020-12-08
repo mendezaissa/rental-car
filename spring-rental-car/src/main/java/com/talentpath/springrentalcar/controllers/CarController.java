@@ -40,13 +40,13 @@ public class CarController {
 
     //add booking
     @PutMapping("/rent")
-    public int bookCar (@RequestBody Book book) throws BookingDaoException, InvalidBookingException {
+    public int bookCar (@RequestBody Book book) throws BookingDaoException, InvalidBookingException, NoCarFoundException {
         return service.bookCar(book);
     }
 
     //gets all bookings by car id
     @GetMapping("/bookings/{id}")
-    public List<Transaction> getBookingsByCar (@PathVariable Integer id){
+    public List<Transaction> getBookingsByCar (@PathVariable Integer id) throws NoCarFoundException {
         return service.getBookingsByCardId(id);
     }
 

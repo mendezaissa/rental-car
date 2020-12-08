@@ -34,7 +34,7 @@ public class CarService {
         return car;
     }
 
-    public int bookCar(Book toBook) throws BookingDaoException {
+    public int bookCar(Book toBook) throws BookingDaoException, NoCarFoundException {
 
         List<Transaction> bookedDates = dao.getCarBookings(toBook.getCarId());
 
@@ -55,7 +55,7 @@ public class CarService {
         return allTransactions.size();
     }
 
-    public List<Transaction> getBookingsByCardId(Integer id) {
+    public List<Transaction> getBookingsByCardId(Integer id) throws NoCarFoundException {
         List<Transaction> bookedDates = dao.getCarBookings(id);
         return bookedDates;
     }

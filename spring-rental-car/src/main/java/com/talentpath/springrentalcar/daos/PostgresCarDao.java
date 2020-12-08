@@ -47,9 +47,15 @@ public class PostgresCarDao implements CarDao {
     }
 
     @Override
-    public List<Transaction> getCarBookings(Integer carId) {
-        List<Transaction> transactions = template.query("select * from \"transaction\" where \"carId\" = '" + carId + "'", new TransactionMapper());
-        return transactions;
+    public List<Transaction> getCarBookings(Integer carId) throws NoCarFoundException {
+
+        try{
+            List<Transaction> transactions = template.query("select * from \"transaction\" where \"carId\" = '" + carId + "'", new TransactionMapper());
+            return transactions;
+        }catch( DataAccessException ex){
+            throw new NoCarFoundException("Could not retrieve transactions for car with id: " + carId );
+        }
+
     }
 
     @Override
