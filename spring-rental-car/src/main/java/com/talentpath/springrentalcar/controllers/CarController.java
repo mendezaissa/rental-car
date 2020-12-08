@@ -3,6 +3,7 @@ package com.talentpath.springrentalcar.controllers;
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
 import com.talentpath.springrentalcar.exceptions.InvalidBookingException;
 import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
+import com.talentpath.springrentalcar.exceptions.NoTransactionFoundException;
 import com.talentpath.springrentalcar.models.Book;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
@@ -52,7 +53,7 @@ public class CarController {
 
     //delete booking by transaction Id
     @DeleteMapping("/delete/{id}")
-    public void deleteBooking( @PathVariable Integer id){
+    public void deleteBooking( @PathVariable Integer id) throws NoTransactionFoundException {
         service.getBookingByTransactionId(id);
     }
 

@@ -3,6 +3,7 @@ package com.talentpath.springrentalcar.daos;
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
 import com.talentpath.springrentalcar.exceptions.InvalidBookingException;
 import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
+import com.talentpath.springrentalcar.exceptions.NoTransactionFoundException;
 import com.talentpath.springrentalcar.models.Book;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
@@ -48,7 +49,7 @@ public class PostgresCarDao implements CarDao {
 
     @Override
     public List<Transaction> getCarBookings(Integer carId) throws NoCarFoundException {
-        
+
         try{
             List<Transaction> transactions = template.query("select * from \"transaction\" where \"carId\" = '" + carId + "'", new TransactionMapper());
 
@@ -86,8 +87,23 @@ public class PostgresCarDao implements CarDao {
     }
 
     @Override
-    public void deleteByTransactionId(Integer id) {
-        template.execute("delete from \"transaction\" where \"transactionId\" = '" +id+ "'" );
+    public void deleteByTransactionId(Integer id) throws NoTransactionFoundException {
+
+        List<Transaction> transactionList = template.query("select * from \"transaction\"", new TransactionMapper() );
+        int size = transactionList.size();
+
+        if( id == null ){
+            throw new NoTransactionFoundException("could not find transaction with id null");
+        }
+
+            template.execute("delete from \"transaction\" where \"transactionId\" = '" +id+ "'" );
+
+            List<Transaction> transactionList2 = template.query("select * from \"transaction\"", new TransactionMapper() );
+            int sizeAfterDelete = transactionList.size();
+
+            if(size == sizeAfterDelete){
+                throw new NoTransactionFoundException("no transaction was deleted");
+            }
     }
 
     @Override
