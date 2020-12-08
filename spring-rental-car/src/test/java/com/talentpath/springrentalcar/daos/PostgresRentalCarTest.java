@@ -1,6 +1,7 @@
 package com.talentpath.springrentalcar.daos;
 
 import com.talentpath.springrentalcar.exceptions.BookingDaoException;
+import com.talentpath.springrentalcar.exceptions.InvalidBookingException;
 import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.exceptions.NoTransactionFoundException;
 import com.talentpath.springrentalcar.models.Book;
@@ -147,6 +148,84 @@ public class PostgresRentalCarTest {
             daoToTest.deleteByTransactionId(null);
             fail("should throw NoTransactionFoundException");
         }catch(NoTransactionFoundException ex){
+            //should reach here
+        }
+    }
+
+    @Test
+    void addTransaction() throws BookingDaoException {
+        Book book = new Book();
+        book.setCustomerId(1);
+        book.setCarId(1);
+
+        Date from = new Date();
+        Date to = new Date();
+
+        book.setFrom(from);
+        book.setTo(to);
+
+        daoToTest.addTransaction(book);
+
+        List<Transaction> after = daoToTest.getAllTransactions();
+        int sizeAfter = after.size();
+
+        assertEquals(1, sizeAfter);
+    }
+
+    @Test
+    void addTransactionBadCarId() {
+
+        try{
+            Book book = new Book();
+            book.setCarId(100);
+            book.setCustomerId(1);
+
+            Date from = new Date();
+            Date to = new Date();
+
+            book.setFrom(from);
+            book.setTo(to);
+
+            daoToTest.addTransaction(book);
+            fail("should throw BookingDaoException");
+        }catch(BookingDaoException ex){
+            //should reach here
+        }
+    }
+
+    @Test
+    void addTransactionBadCustomerId() {
+        try{
+            Book book = new Book();
+            book.setCarId(1);
+            book.setCustomerId(100);
+
+            Date from = new Date();
+            Date to = new Date();
+
+            book.setFrom(from);
+            book.setTo(to);
+
+            daoToTest.addTransaction(book);
+            fail("should throw BookingDaoException");
+        }catch(BookingDaoException ex){
+            //should reach here
+        }
+    }
+
+    @Test
+    void addTransactionNullDate(){
+        try{
+            Book book = new Book();
+            book.setCarId(1);
+            book.setCustomerId(1);
+
+            book.setFrom(null);
+            book.setTo(null);
+
+            daoToTest.addTransaction(book);
+            fail("should throw BookingDaoException");
+        }catch(BookingDaoException ex){
             //should reach here
         }
     }
