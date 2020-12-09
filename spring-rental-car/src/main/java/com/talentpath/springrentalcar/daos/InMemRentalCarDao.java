@@ -63,7 +63,11 @@ public class InMemRentalCarDao implements CarDao{
 
     @Override
     public Car getById(Integer carId) throws NoCarFoundException {
-        return null;
+        Car toReturn = allCars.stream().filter( g -> g.getCarId() == carId ).findAny().orElse(null);
+        if( toReturn != null) { return new Car(toReturn); }
+        else{
+            throw new NoCarFoundException("no car found");
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.talentpath.springrentalcar.services;
 
 import com.talentpath.springrentalcar.daos.CarDao;
 import com.talentpath.springrentalcar.daos.InMemRentalCarDao;
+import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,6 +45,36 @@ public class RentalCarServiceTest {
     void getAllTransactions(){
         List<Transaction> allTransactions = serviceToTest.getAllBookings();
         assertEquals(1, allTransactions.size() );
+    }
+
+    @Test
+    void getCarById(){
+        try{
+            Car carToGet = serviceToTest.getById(1);
+            assertEquals(1, carToGet.getCarId() );
+        }catch( NoCarFoundException ex ){
+            fail("Could not find car with id 1");
+        }
+    }
+
+    @Test
+    void getCarByBadId(){
+        try{
+            Car carToGet = serviceToTest.getById(-1);
+            fail("should throw NoCarFoundException");
+        }catch( NoCarFoundException ex ){
+            //should reach here
+        }
+    }
+
+    @Test
+    void getCarByNullId(){
+        try{
+            Car carToGet = serviceToTest.getById(null);
+            fail("should throw NoCarFoundException");
+        }catch( NoCarFoundException ex ){
+            //should reach here
+        }
     }
 
 }
