@@ -78,7 +78,7 @@ public class InMemRentalCarDao implements CarDao{
 
     @Override
     public List<Transaction> getAllTransactions() {
-        return null;
+        return allTransactions.stream().map( toCopy -> new Transaction( toCopy ) ).collect(Collectors.toList());
     }
 
     @Override
