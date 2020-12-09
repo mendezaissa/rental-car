@@ -3,6 +3,7 @@ package com.talentpath.springrentalcar.services;
 import com.talentpath.springrentalcar.daos.CarDao;
 import com.talentpath.springrentalcar.daos.InMemRentalCarDao;
 import com.talentpath.springrentalcar.exceptions.NoCarFoundException;
+import com.talentpath.springrentalcar.exceptions.NoTransactionFoundException;
 import com.talentpath.springrentalcar.models.Car;
 import com.talentpath.springrentalcar.models.Transaction;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,6 +73,36 @@ public class RentalCarServiceTest {
     void getCarByNullId(){
         try{
             Car carToGet = serviceToTest.getById(null);
+            fail("should throw NoCarFoundException");
+        }catch( NoCarFoundException ex ){
+            //should reach here
+        }
+    }
+
+    @Test
+    void getCarBookings(){
+        try{
+            List<Transaction> transactions = serviceToTest.getBookingsByCardId(1);
+            assertEquals(1, transactions.size() );
+        }catch ( NoCarFoundException ex ){
+            fail("could not find bookings");
+        }
+    }
+
+    @Test
+    void getCarBookingsBadId(){
+        try{
+            List<Transaction> transactions = serviceToTest.getBookingsByCardId(100);
+            fail("should throw NoCarFoundException");
+        }catch ( NoCarFoundException ex){
+            //should reach here
+        }
+    }
+
+    @Test
+    void getCarBookingsByNullId(){
+        try{
+            List<Transaction> transactions = serviceToTest.getBookingsByCardId(null);
             fail("should throw NoCarFoundException");
         }catch( NoCarFoundException ex ){
             //should reach here

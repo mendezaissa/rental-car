@@ -72,7 +72,23 @@ public class InMemRentalCarDao implements CarDao{
 
     @Override
     public List<Transaction> getCarBookings(Integer carId) throws NoCarFoundException {
-        return null;
+
+        List<Transaction> transactionByCarId = new ArrayList<>();
+
+        for(int i = 0; i < allTransactions.size(); i++){
+            Transaction transaction = allTransactions.get(i);
+
+            if( transaction.getCarId() == carId ){
+                transactionByCarId.add(transaction);
+            }
+        }
+
+        if( transactionByCarId.size() == 0){
+            throw new NoCarFoundException("no bookings found for car id: " + carId);
+        }
+        else{
+            return transactionByCarId;
+        }
     }
 
     @Override
