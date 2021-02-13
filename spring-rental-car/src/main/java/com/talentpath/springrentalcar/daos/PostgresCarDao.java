@@ -103,7 +103,7 @@ public class PostgresCarDao implements CarDao {
             template.execute("delete from \"transaction\" where \"transactionId\" = '" +id+ "'" );
 
             List<Transaction> transactionList2 = template.query("select * from \"transaction\"", new TransactionMapper() );
-            int sizeAfterDelete = transactionList.size();
+            int sizeAfterDelete = transactionList2.size();
 
             if(size == sizeAfterDelete){
                 throw new NoTransactionFoundException("no transaction was deleted");
